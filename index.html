@@ -1,1 +1,125 @@
-llack.github.io
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sabOyen</title>
+    <link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+      window.onload = function() {
+        const yearElement = document.getElementById('years');
+        const currentYear = new Date().getFullYear();
+        yearElement.textContent = currentYear;
+      }
+    </script>
+	 <script>
+      // 팝업 열기
+      function openPopup() {
+        document.getElementById('popup-overlay').style.display = 'flex';
+      }
+
+      // 팝업 닫기
+      function closePopup() {
+        document.getElementById('popup-overlay').style.display = 'none';
+      }
+
+      // 이메일 복사
+      function copyEmail() {
+        const email = document.getElementById('email');
+        navigator.clipboard.writeText(email.textContent).then(() => {
+          alert('Email copied to clipboard!');
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <h2 class="logo"><a href="/">sab<span style="color:#00adb5">O</span>yen</a></h2>
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" id="hamburger-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+            <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </label>
+        <ul class="links">
+          <li><a href="/">Home</a></li>
+          <li><a href="javascript:void(0);" onclick="openPopup()">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="hero-section">
+      <div class="hero">
+        <h2>Mobile App Development</h2>
+        <p>
+          Our apps are designed to make your life easier and more innovative. Experience intuitive design and powerful features.
+        </p>
+        <div class="buttons">
+			<div class="app-container">
+			  <div id="app-scroll-container" class="app-scroll-container">
+				<div class="app-icon"><i class="fab fa-android" style="color:#3DDC84;"></i></div>
+<div class="app-icon"><i class="fab fa-apple" style="color:#000000;"></i></div>
+<div class="app-icon"><i class="fas fa-gamepad" style="color:#FF6F61;"></i></div>
+<div class="app-icon"><i class="fas fa-mobile-alt" style="color:#00BFFF;"></i></div>
+<div class="app-icon"><i class="fas fa-headphones-alt" style="color:#8A2BE2;"></i></div>
+<div class="app-icon"><i class="fas fa-camera-retro" style="color:#FFB347;"></i></div>
+<div class="app-icon"><i class="fas fa-cloud" style="color:#87CEEB;"></i></div>
+<div class="app-icon"><i class="fas fa-code" style="color:#4B0082;"></i></div>
+<div class="app-icon"><i class="fas fa-cogs" style="color:#708090;"></i></div>
+<div class="app-icon"><i class="fas fa-rocket" style="color:#FF4500;"></i></div>
+<div class="app-icon"><i class="fas fa-bolt" style="color:#FFD700;"></i></div>
+<div class="app-icon"><i class="fas fa-globe" style="color:#2E8B57;"></i></div>
+
+				<!-- 계속 추가 가능 -->
+			  </div>
+			</div>
+        </div>
+      </div>
+      <div class="img">
+        <img src="https://www.codingnepalweb.com/demos/create-responsive-website-html-css/hero-bg.png" alt="hero image" />
+      </div>
+    </section>
+
+	<!-- Popup for Contact Us -->
+    <div id="popup-overlay" class="popup-overlay" onclick="closePopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <h3>Contact Us</h3>
+        <p>Feel free to reach out to us via email:</p>
+        <div class="email-container">
+          <p id="email" class="email">saboyen343@gmail.com</p>
+          <!-- 아이콘을 버튼으로 사용 -->
+          <button class="copy-btn" onclick="copyEmail()">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+	
+    <!-- Simple Footer Section -->
+    <footer>
+      <p>&copy; <span id="years"></span> sabOyen. All rights reserved.</p>
+    </footer>
+ <script>
+	$(function() {
+  const $container = $('#app-scroll-container');
+  const containerWidth = $container.width() / 2; // 두 세트 중 한 세트 너비
+  let leftPos = 0;
+  const speed = 0.5; // 0.5px per frame 이동 속도 (조절 가능)
+
+  function step() {
+    leftPos -= speed;
+    if (Math.abs(leftPos) >= containerWidth) {
+      leftPos = 0; // 위치 초기화 (루프)
+    }
+    $container.css('left', leftPos + 'px');
+    requestAnimationFrame(step);
+  }
+
+  step(); // 애니메이션 시작
+});
+ </script>
+  </body>
+</html>

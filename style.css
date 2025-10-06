@@ -355,3 +355,11 @@ footer .address-line {
   margin-left: 0;
   /* 첫 아이콘은 좌측 마진 없음 */
 }
+
+/* style.css에 추가 */
+.notel {
+  pointer-events: none;
+  text-decoration: none;
+  color: white;
+  user-select: text;
+}

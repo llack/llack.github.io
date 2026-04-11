@@ -1,132 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="format-detection" content="telephone=no" />
   <title>SABOYEN STUDIO</title>
-  <link rel="stylesheet" href="style.css?v=11" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    window.onload = function () {
-      const yearElement = document.getElementById('years');
-      const currentYear = new Date().getFullYear();
-      yearElement.textContent = currentYear;
-    }
-  </script>
-  <script>
-    // 팝업 열기
-    function openPopup() {
-      document.getElementById('popup-overlay').style.display = 'flex';
-	  document.getElementById('menu-toggle').checked = false;
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent: #00adb5;
+      --bg: #0b1520;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(255,255,255,0.07);
     }
 
-    // 팝업 닫기
-    function closePopup() {
-      document.getElementById('popup-overlay').style.display = 'none';
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    // 이메일 복사
-    function copyEmail() {
-      const email = document.getElementById('email');
-      navigator.clipboard.writeText(email.textContent).then(() => {
-        alert('Email copied to clipboard!');
-      });
+    .container {
+      width: 100%;
+      max-width: 560px;
+      padding: 40px 24px;
+      text-align: center;
     }
-  </script>
+
+    .logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      object-fit: contain;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0 auto 40px;
+      border-radius: 2px;
+      opacity: 0.6;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .link-item:hover {
+      background: rgba(0,173,181,0.07);
+      border-color: rgba(0,173,181,0.3);
+    }
+
+    .link-item .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .link-item .icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .link-item .arrow {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      background: #142030;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      width: 320px;
+      text-align: center;
+    }
+
+    .popup-content h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .popup-content p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .email-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+
+    .email-row span {
+      flex: 1;
+      text-align: left;
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover { background: #007f8e; }
+
+    .close-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 8px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.35rem; }
+    }
+  </style>
 </head>
-
 <body>
-  <header class="header">
-    <nav class="navbar">
-      <h2 class="logo"><a href="/">SAB<span style="color:#00adb5">O</span>YEN STUDIO</a></h2>
-      <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" id="hamburger-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </label>
-      <ul class="links">
-        <li><a href="/">Home</a></li>
-        <li><a href="./privacy/sabOyen.html">Privacy Policy</a></li>
-        <li><a href="javascript:void(0);" onclick="openPopup()">Contact Us</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section class="hero-section">
-    <div class="hero">
-      <h2>Mobile App Development</h2>
-      <p>
-        Our apps are designed to make your life easier and more innovative. Experience intuitive design and powerful
-        features.
-      </p>
-      <div class="buttons">
-        <div class="app-container">
-          <div id="app-scroll-container" class="app-scroll-container">
-            <div class="app-icon"><i class="fab fa-android" style="color:#3DDC84;"></i></div>
-            <div class="app-icon"><i class="fab fa-apple" style="color:#000000;"></i></div>
-            <div class="app-icon"><i class="fas fa-gamepad" style="color:#FF6F61;"></i></div>
-            <div class="app-icon"><i class="fas fa-mobile-alt" style="color:#00BFFF;"></i></div>
-            <div class="app-icon"><i class="fas fa-headphones-alt" style="color:#8A2BE2;"></i></div>
-            <div class="app-icon"><i class="fas fa-camera-retro" style="color:#FFB347;"></i></div>
-            <div class="app-icon"><i class="fas fa-cloud" style="color:#87CEEB;"></i></div>
-            <div class="app-icon"><i class="fas fa-code" style="color:#4B0082;"></i></div>
-            <div class="app-icon"><i class="fas fa-cogs" style="color:#708090;"></i></div>
-            <div class="app-icon"><i class="fas fa-rocket" style="color:#FF4500;"></i></div>
-            <div class="app-icon"><i class="fas fa-bolt" style="color:#FFD700;"></i></div>
-            <div class="app-icon"><i class="fas fa-globe" style="color:#2E8B57;"></i></div>
 
-            <!-- 계속 추가 가능 -->
-          </div>
+  <div class="container">
+    <img src="logo.png" alt="SABOYEN STUDIO" class="logo" />
+    <h1>SAB<span>O</span>YEN STUDIO</h1>
+    <p class="tagline">Application development &amp; software consulting.<br>We build, publish, and help bring your ideas to life.</p>
+    <div class="divider"></div>
+
+    <div class="links">
+      <a href="./privacy/sabOyen.html" class="link-item">
+        <div class="left">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          Privacy Policy
         </div>
+        <i class="fas fa-chevron-right arrow"></i>
+      </a>
+      <div class="link-item" onclick="openPopup()">
+        <div class="left">
+          <div class="icon"><i class="fas fa-envelope"></i></div>
+          Contact
+        </div>
+        <i class="fas fa-chevron-right arrow"></i>
       </div>
+      <a href="https://play.google.com/store/apps/dev?id=5088221228733126356" target="_blank" rel="noopener noreferrer" class="link-item">
+        <div class="left">
+          <div class="icon"><i class="fab fa-google-play"></i></div>
+          Google Play
+        </div>
+        <i class="fas fa-external-link-alt arrow"></i>
+      </a>
     </div>
-    <div class="img">
-      <img src="hero-bg.png" alt="hero image" />
-    </div>
-  </section>
 
-  <!-- Popup for Contact Us -->
+    <div class="footer">
+      &copy; <span id="year"></span> SABOYEN STUDIO
+    </div>
+  </div>
+
   <div id="popup-overlay" class="popup-overlay" onclick="closePopup()">
     <div class="popup-content" onclick="event.stopPropagation()">
-      <h3>Contact Us</h3>
-      <p>Feel free to email us:</p>
-      <div class="email-container">
-        <p id="email" class="email">saboyen343@gmail.com</p>
-        <!-- 아이콘을 버튼으로 사용 -->
-        <button class="copy-btn" onclick="copyEmail()">
-          <i class="fas fa-copy"></i>
-        </button>
+      <h3>Contact</h3>
+      <p>Feel free to reach out anytime</p>
+      <div class="email-row">
+        <span id="email">saboyen343@gmail.com</span>
+        <button class="copy-btn" onclick="copyEmail()"><i class="fas fa-copy"></i></button>
       </div>
       <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
   </div>
 
-  <!-- Simple Footer Section -->
-  <footer style="padding: 10px 20px;">
-    <p style="color: #ffffff;font-size: 12px;">&copy; <span id="years"></span> SABOYEN STUDIO. All rights reserved.</p>
-  </footer>
   <script>
-    $(function () {
-      const $container = $('#app-scroll-container');
-      const containerWidth = $container.width() / 2; // 두 세트 중 한 세트 너비
-      let leftPos = 0;
-      const speed = 0.5; // 0.5px per frame 이동 속도 (조절 가능)
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      function step() {
-        leftPos -= speed;
-        if (Math.abs(leftPos) >= containerWidth) {
-          leftPos = 0; // 위치 초기화 (루프)
-        }
-        $container.css('left', leftPos + 'px');
-        requestAnimationFrame(step);
-      }
-
-      step(); // 애니메이션 시작
-    });
+    function openPopup() {
+      document.getElementById('popup-overlay').style.display = 'flex';
+    }
+    function closePopup() {
+      document.getElementById('popup-overlay').style.display = 'none';
+    }
+    function copyEmail() {
+      navigator.clipboard.writeText(document.getElementById('email').textContent).then(function() {
+        alert('Copied!');
+      });
+    }
   </script>
 </body>
-
 </html>

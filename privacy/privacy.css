@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --accent: #00adb5;
+  --bg: #f5f7fa;
+  --text: #1a2332;
+  --text-muted: #5c6b7e;
+  --border: #e2e8f0;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #0f3a45 0%, #0d1b2a 60%, #1a0a28 100%);
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.page-header h1 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.page-header p {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.83rem;
+  margin-top: 6px;
+}
+
+.accent-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #47b2e4);
+}
+
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.content-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.content-card strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+
+.content-card strong:first-child { margin-top: 0; }
+
+.content-card p { margin-bottom: 10px; }
+
+.content-card br { display: none; }
+
+.content-card ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.content-card li { margin-bottom: 6px; }
+
+.content-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.content-card a:hover { text-decoration: underline; }
+
+.content-card hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+.content-card div { display: contents; }
+
+.page-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.78rem;
+  color: #aab4c0;
+}
+
+.page-footer a { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .content-card { padding: 28px 20px; }
+  .page-header h1 { font-size: 1.2rem; }
+}
